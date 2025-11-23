@@ -12,10 +12,18 @@ web: rust
 deno: rust
 	@wasm-bindgen target/wasm32-unknown-unknown/release/simplecc_wasm.wasm --out-dir ./pkg/deno --target deno
 
-build: nodejs web deno
+generate-dicts:
+	@cd OpenCC && make
+	@cd OpenCC && cp ./build/rel/data/*.txt data/dictionary
+
+build: generate-dicts nodejs web deno
 
 opt: build
 	@wasm-opt -Oz -o pkg/web/simplecc_wasm_bg.owasm pkg/web/simplecc_wasm_bg.wasm
 	@mv pkg/web/simplecc_wasm_bg.owasm pkg/web/simplecc_wasm_bg.wasm
 	@wasm-opt -Oz -o pkg/nodejs/simplecc_wasm_bg.owasm pkg/nodejs/simplecc_wasm_bg.wasm
 	@mv pkg/nodejs/simplecc_wasm_bg.owasm pkg/nodejs/simplecc_wasm_bg.wasm
+
+dist: opt
+	@mkdir -p dist/web
+	@cp pkg/web/* dist/web/

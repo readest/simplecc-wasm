@@ -50,7 +50,13 @@ pub static S2TWP: LazyLock<Dict> = LazyLock::new(|| {
 });
 
 pub static HK2S: LazyLock<Dict> =
-    LazyLock::new(|| T2S.clone().chain(builtin_dicts!("HKVariantsRevPhrases")));
+    LazyLock::new(|| builtin_dicts!("HKVariantsRev", "HKVariantsRevPhrases").chain(T2S.clone()));
+
+pub static TW2S: LazyLock<Dict> =
+    LazyLock::new(|| builtin_dicts!("TWVariantsRev", "TWVariantsRevPhrases").chain(T2S.clone()));
+
+pub static TW2SP: LazyLock<Dict> =
+    LazyLock::new(|| builtin_dicts!("TWPhrasesRev", "TWVariantsRev").chain(T2S.clone()));
 
 #[cfg(test)]
 mod tests {
@@ -68,6 +74,12 @@ mod tests {
     fn test_builtin_opencc() {
         test!(S2T, "s2t");
         test!(T2S, "t2s");
+        test!(S2TW, "s2tw");
+        test!(S2HK, "s2hk");
+        test!(S2TWP, "s2twp");
+        test!(HK2S, "hk2s");
+        test!(TW2S, "tw2s");
+        test!(TW2SP, "tw2sp");
     }
 
     #[test]
@@ -75,5 +87,8 @@ mod tests {
         test!(S2TW, "s2tw");
         test!(S2HK, "s2hk");
         test!(S2TWP, "s2twp");
+        test!(HK2S, "hk2s");
+        test!(TW2S, "tw2s");
+        test!(TW2SP, "tw2sp");
     }
 }

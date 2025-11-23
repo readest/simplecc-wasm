@@ -15,6 +15,8 @@ pub fn simplecc(text: &str, name: &str) -> Result<String, JsValue> {
             "s2hk" => &*dicts::S2HK,
             "s2twp" => &*dicts::S2TWP,
             "hk2s" => &*dicts::HK2S,
+            "tw2s" => &*dicts::TW2S,
+            "tw2sp" => &*dicts::TW2SP,
             _ => return Err(JsValue::from_str("dict name is not supported")),
         },
     };

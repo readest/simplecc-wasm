@@ -1,6 +1,7 @@
 {
   "name": "simplecc-wasm",
   "version": "1.1.0",
+  "type": "module",
   "description": "Simple OpenCC alternative with wasm",
   "main": "pkg/nodejs/simplecc_wasm.js",
   "exports": {
@@ -67,6 +68,8 @@
   },
   "homepage": "https://github.com/fengkx/simplecc-wasm#readme",
   "devDependencies": {
-    "vitest": "^0.26.3"
+    "vite": "^7.2.4",
+    "vite-node": "^5.2.0",
+    "vitest": "^4.0.13"
   }
 }
